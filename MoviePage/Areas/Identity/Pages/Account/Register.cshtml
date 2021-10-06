@@ -1,0 +1,64 @@
+﻿@page
+@model MoviePage.Areas.Identity.Pages.Account.RegisterModel
+@{
+}
+<br />
+<div class="container mt-4">
+    <div class="border p-2">
+        <h3 class="text-info text-center">Sign up</h3>
+        <form method="post">
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-group row">
+                <div class="col-md-1 offset-2">
+                    <label asp-for="@Model.Register.UserName"></label>
+                </div>
+                <div class="col-6">
+                    <input type="text" value="" class="form-control" asp-for="@Model.Register.UserName" placeholder="Username..." autocomplete="off" />
+                    <span asp-validation-for="@Model.Register.UserName" class="text-danger"></span>
+                </div>
+
+            </div>
+            <div class="form-group row">
+                <div class="col-1 offset-2">
+                    <label asp-for="@Model.Register.Email"></label>
+                </div>
+                <div class="col-6">
+                    <input type="email" class="form-control" value="" asp-for="@Model.Register.Email" placeholder="Email..." autocomplete="off" />
+                    <span asp-validation-for="@Model.Register.Email" class="text-danger"></span>
+                </div>
+                
+            </div>
+            <div class="form-group row">
+                <div class="col-1 offset-2">
+                    <label asp-for="@Model.Register.Password"></label>
+                </div>
+                <div class="col-6">
+                    <input type="password" value="" class="form-control" asp-for="@Model.Register.Password" placeholder="Password..." autocomplete="off" />
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-1 offset-2">
+                    <label asp-for="@Model.Register.PhoneNumber"></label>
+                </div>
+                <div class="col-6">
+                    <input type="number" class="form-control" value="" asp-for="@Model.Register.PhoneNumber" placeholder="Phone number..." autocomplete="off" />
+                    <span asp-validation-for="@Model.Register.PhoneNumber" class="text-danger" ></span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center">
+                <input type="submit" class="btn btn-primary" value="Register" />
+            </div>
+        </form>
+        <div class="form-group d-flex justify-content-between">
+            <div>
+                <a asp-area="Customer" asp-controller="Home" asp-action="Index" class="text-decoration-none">Home</a>
+            </div>
+            <div>
+                <a asp-area="Identity" asp-page="Login" class="text-decoration-none">Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{ 
+    <partial name="~/Views/Shared/_ValidationScriptsPartial.cshtml"/>
+}

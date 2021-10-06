@@ -1,0 +1,39 @@
+﻿@model List<Movie>
+<br />
+<div class="container-fluid">
+    <h2 class="text-info">Manage Movie</h2>
+    <div class="border p-2">
+        <div class="d-flex justify-content-between">
+            <div class="addBtn">
+                <a asp-area="Admin" asp-controller="Movie" asp-action="Create" class="btn btn-primary rounded-pill">Add new <i class="fa fa-plus"></i></a>
+            </div>
+            <div class="search">
+                <form method="post">
+                    <input type="text" name="name" value="" />
+                    <button class="btn btn-info rounded"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+        <!--Data table -->
+        <div>
+            <div class="table-responsive">
+                <table id="datatable" class="table table-striped">
+                    <tr class="table-secondary">
+                        <td>@Html.DisplayNameFor(e => e.FirstOrDefault().Title)</td>
+                        <td>@Html.DisplayNameFor(e => e.FirstOrDefault().Description)</td>
+                        <td>@Html.DisplayNameFor(e => e.FirstOrDefault().ReleasedAt) </td>
+                        <td>@Html.DisplayNameFor(e => e.FirstOrDefault().Length)</td>
+                    </tr>
+                    @foreach (var movie in Model)
+                    {
+                        <tr>
+                            <td>@movie.Title</td>
+                            <td>@movie.Description</td>
+                            <td>@movie.Budget </td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
