@@ -1,0 +1,155 @@
+<br>
+<div class="container text-white mt-4">
+    <div class="d-flex justify-content-between mb-2">
+        <div>
+            <h1 class="font-weight-bold">{{movie?.shortName!}}</h1>
+            <h4>Original title: {{movie.title}}</h4>
+            <div class="d-flex ">
+                <a class="mr-2">{{movie.releasedAt | date:'yyyy'}}</a>
+                <div class="d-flex align-items-center mr-2">
+                    <i class="fas fa-xs fa-circle"></i>
+                </div>
+                <a class="mr-2">{{movie.duration | duration}}</a>
+                <div class="d-flex align-items-center mr-2">
+                    <i class="fas fa-xs fa-circle"></i>
+                </div>
+                <a class="mr-2">{{movie.pg.title}}</a>
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="font-weight-bold mr-3">
+                <h3 class="text-light">MiDB rating</h3>
+                <span><i class="fas fa-2x fa-star text-warning"></i> {{movie.rating}} / 10</span>
+                <small>400k</small>
+            </div>
+            <div class="font-weight-bold mr-3">
+                <h3 class="text-light">Your rating</h3>
+                <button (click)="openRate(rate)" class="btn btn-primary rounded p-2"> <i class="far fa-star text-white"></i> Rate</button>
+            </div>
+            <div class="font-weight-bold mr-3">
+                <h3 class="text-light">Popularity</h3>
+                <span><i class="fas fa-2x fa-star text-warning"></i> 5 / 10</span>
+            </div>
+        </div>
+    </div>
+    <div class="card-bg-secondary rounded d-flex justify-content-end mb-2">
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link active" href="#">Cast & crews</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">User reviews</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">All topic</a>
+            </li>
+        </ul>
+    </div>
+    <div class="d-flex mb-4 detail-collapse">
+        <div class="mr-2 w-25">
+            <img src="{{movie.cover}}" alt=""
+                class="img-fluid d-block">
+        </div>
+        <div class="mr-2 w-50">
+            <img src="https://i-giaitri.vnecdn.net/2021/10/27/duneanhtop-1635316028-7415-1635323787_680x0.jpg" alt=""
+                class="img-fluid d-block">
+        </div>
+        <div class="w-25">
+            <a class="card-bg-secondary mb-2 d-flex w-100 justify-content-center box-item">
+                <div class="align-self-center text-center">
+                    <h2>
+                        Videos
+                    </h2>
+                    <i class="fas fa-play fa-2x"></i>
+                </div>
+
+            </a>
+            <a class="card-bg-secondary mb-2 d-flex w-100 justify-content-center box-item">
+                <div class="align-self-center text-center">
+                    <h2>
+                        Photos
+                    </h2>
+                    <i class="fas fa-images fa-2x"></i>
+                </div>
+
+            </a>
+        </div>
+    </div>
+    <div class="row font-weight-bold">
+        <div class="col-lg-8 col-md-8 col-8">
+            <div class="d-flex">
+                <button class="btn rounded-pill btn-outline-light p-2">Action</button>
+                <button class="btn rounded-pill btn-outline-light p-2">Adventure</button>
+                <button class="btn rounded-pill btn-outline-light p-2">Drama</button>
+            </div>
+            <div>
+                Feature adaptation of Frank Herbert's science fiction novel, about the son of a noble family entrusted
+                with the protection of the most valuable asset and most vital element in the galaxy.
+            </div>
+            <hr>
+            <div class="d-flex">
+                <span>Director: </span>  
+                <span>
+                    <ul class="d-flex">
+                        <li class="mr-4" *ngFor="let director of movie.directors">{{director.fullName}}</li>
+                    </ul>
+                </span>
+            </div>
+            <div class="d-flex">
+                <span>Stars: </span>
+                <span>
+                    <ul class="d-flex">
+                        <li class="mr-4" *ngFor="let actor of movie.actors">{{actor.fullName}}</li>
+                    </ul>
+                </span>
+            </div>
+
+        </div>
+        <div class="col-lg-4 col-md-4 col-4">
+            <button class="btn card-bg-secondary w-100 rounded mb-3"><i class="fas fa-plus"></i> Add to
+                watchlist</button>
+            <div class="d-flex">
+                <h3 class="mr-3">3.9k reviews</h3>
+                <h3><span class="font-weight-bold p-2" style="background-color: #54A72A;">74</span> metascore</h3>
+            </div>
+        </div>
+    </div>
+    <div class="clear-fix"></div>
+    <div class="font-weight-bold">
+        <h1 class="border-left border-warning pl-2">
+            Actors <i class="fas fa-chevron-right"></i>
+        </h1>
+        <div>
+
+        </div>
+    </div>
+    <div class="font-weight-bold">
+        <h1 class="border-left border-warning pl-2">
+            Posts: <i class="fas fa-chevron-right"></i>
+        </h1>
+    </div>
+    <div class="font-weight-bold">
+        <h1 class="border-left border-warning pl-2">
+            Reviews <i class="fas fa-chevron-right"></i>
+        </h1>
+    </div>
+</div>
+<ng-template #rate let-rateModal>
+    <div class="modal-header p-2 font-weight-bold">
+        <h3 class="text-center" id="modal-basic-title">Rate</h3>
+        <button type="button" class="close" aria-label="Close" (click)="rateModal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h4>Give your rating for this movie</h4>
+        <div class="d-flex">
+            <i (mouseenter)="hoverStar(star)" (click)="clickStar(star)" *ngFor="let star of stars; let i = index" class="fas fa-2x fa-star mr-1" [class.text-warning]="i < temp"></i> 
+        </div>
+       
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-secondary rounded p-3" (click)="rateModal.dismiss()">Cancel</button>
+        <button (click)="clickRate(rateModal)" class="btn btn-primary rounded p-3"><i class="far fa-star text-white"></i> Rate now</button>
+    </div>
+</ng-template>

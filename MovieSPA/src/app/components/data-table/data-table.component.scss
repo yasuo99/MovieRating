@@ -1,0 +1,32 @@
+.table-column {
+  width: 125px;
+}
+.content-table {
+  width: 100%;
+  display: table;
+  overflow-y: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.table-wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  margin: 0px 10px 0px 10px;
+}
+
+.table-scroll-wrap {
+  flex: 1;
+  flex-basis: auto;
+  min-width: 400px;
+  overflow-x: auto;
+  overflow-y: auto;
+  white-space: nowrap;
+}
+
+.no-overflow {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

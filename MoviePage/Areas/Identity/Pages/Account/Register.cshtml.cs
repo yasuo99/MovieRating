@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using MoviePage.Areas.Identity.Dtos;
-using MoviePage.Data;
+using MoviePage.DataAccess.Data;
 
 namespace MoviePage.Areas.Identity.Pages.Account
 {

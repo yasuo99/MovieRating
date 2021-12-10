@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="container p-2 border rounded">
+        <div class="row">
+            <div class="image mr-2 col">
+                <img class="img-fluid" src="{{data.cover}}" alt="">
+            </div>
+            <div class="detail col">
+                <h3 class="text-dark">{{data.title}}</h3>
+                <div>
+                    <p>Description: {{data.description}}</p>
+                    <p>Duration: {{data.length}} {{data.length > 1 ? 'minutes' : 'minute'}}</p>
+                    <p>Budget: {{data.budget}}$</p>
+                </div>
+            </div>
+        </div>
+        <app-review [reviews]="data.reviews"></app-review>
+    </div>
+</div>

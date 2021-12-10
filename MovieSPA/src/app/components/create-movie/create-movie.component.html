@@ -1,0 +1,97 @@
+<br>
+<div class="container-fluid">
+    <a class="btn btn-secondary" [routerLink]="['/admin/movies']">Back</a>
+    <div class="container p-2 border rounded">
+        <h3 class="text-info">Create movie</h3>
+        <div class="form-group">
+            <form (ngSubmit)="submit()" [formGroup]="movieForm" #createForm>
+                <div class="form-group">
+                    <label for="title">Title: </label>
+                    <input id="title" type="text" class="form-control" formControlName="title">
+                    <div *ngIf="movieForm.get('title')?.invalid && (movieForm.get('title')?.dirty || movieForm.get('title')?.touched)"
+                        class="alert">
+
+                        <span class="text-danger" *ngIf="movieForm.get('title')?.errors?.required">
+                            Title is required.
+                        </span>
+                        <span class="text-danger" *ngIf="movieForm.get('title')?.errors?.minlength">
+                            Title must be at least 10 characters long.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title">Short name: </label>
+                    <input id="shortName" type="text" class="form-control" formControlName="shortName">
+                    <div *ngIf="movieForm.get('shortName')?.invalid && (movieForm.get('shortName')?.dirty || movieForm.get('shortName')?.touched)"
+                        class="alert">
+                        <span class="text-danger" *ngIf="movieForm.get('shortName')?.errors?.required">
+                            Shortname is required.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="title">Cover: </label>
+                    <input (change)="onFileChange($event, 'image')" id="image" type="file" class="form-control" formControlName="image">
+                    <div *ngIf="movieForm.get('image')?.invalid && (movieForm.get('image')?.dirty || movieForm.get('image')?.touched)"
+                        class="alert">
+                        <span class="text-danger" *ngIf="movieForm.get('image')?.errors?.required">
+                            Cover is required.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description: </label>
+                    <input id="description" type="text" class="form-control" formControlName="description">
+                    <div *ngIf="movieForm.get('description')?.invalid && (movieForm.get('description')?.dirty || movieForm.get('description')?.touched)"
+                        class="alert">
+
+                        <span class="text-danger" *ngIf="movieForm.get('description')?.errors?.required">
+                            description is required.
+                        </span>
+                        <span class="text-danger" *ngIf="movieForm.get('description')?.errors?.minlength">
+                            description must be at least 4 characters long.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="length">Length: </label>
+                    <input id="length" type="number" class="form-control" formControlName="length">
+                    <div *ngIf="movieForm.get('length')?.invalid && (movieForm.get('length')?.dirty || movieForm.get('length')?.touched)"
+                        class="alert">
+
+                        <span class="text-danger" *ngIf="movieForm.get('length')?.errors?.required">
+                            length is required.
+                        </span>
+                        <span class="text-danger" *ngIf="movieForm.get('length')?.errors?.min">
+                            length must be at least 10 minute.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="budget">Budget: </label>
+                    <input id="budget" type="text" class="form-control" formControlName="budget">
+                    <div *ngIf="movieForm.get('budget')?.invalid && (movieForm.get('budget')?.dirty || movieForm.get('budget')?.touched)"
+                        class="alert">
+
+                        <span class="text-danger" *ngIf="movieForm.get('budget')?.errors?.required">
+                            budget is required.
+                        </span>
+                        <span class="text-danger" *ngIf="movieForm.get('budget')?.errors?.min">
+                            budget must be at least 1 dollar.
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="releasedAt">Release At: </label>
+                    <input id="releasedAt" type="date" class="form-control" formControlName="releasedAt">
+                </div>
+                <div class="form-group text-danger">
+                    Form Status: {{movieForm.status}}
+                </div>
+                <div class="form-group">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

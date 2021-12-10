@@ -1,0 +1,68 @@
+<div class="container-fluid">
+  <data-table
+    [data]="data"
+    [columns]="columns"
+    (onPageChange)="onPageChange($event)"
+    [pagination]="pagination">
+  </data-table>
+  <!-- <table class="table table-striped">
+            <thead>
+                <tr class="table-secondary">
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td>Length</td>
+                    <td>Budget</td>
+                    <td>Releade Date</td>
+                    <td></td>
+                </tr>
+            </thead>
+            <tbody *ngIf="fetched">
+                <tr *ngFor="let movie of data.data.items">
+                   <td>{{movie.title}}</td>
+                   <td>{{movie.description}}</td>
+                   <td>{{movie.length}} minutes</td>
+                   <td>{{movie.budget}} $</td>
+                   <td>{{movie.releasedAt}}</td> 
+                   <td>
+                       <a class="btn btn-success">Edit</a>
+                       <a class="btn btn-danger">Delete</a>
+                   </td>
+                </tr>
+            </tbody>
+        </table>
+        <p>Default pagination:</p>
+        <div *ngIf="fetched">
+            <ngb-pagination (pageChange)="pageChange($event)" [collectionSize]="data.data.totalItems" [pageSize]="data.data.pageSize" [(page)]="pagination.currentPage" aria-label="Default pagination"></ngb-pagination>
+        </div> -->
+</div>
+
+<ng-template #editContent let-editModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update</h4>
+    <button type="button" class="close" aria-label="Close" (click)="editModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form #editForm="ngForm">
+      <div class="form-group">
+        edit values here;
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-outline-secondary" (click)="editModal.close()">Close</button>
+    <button type="button" class="btn btn-outline-primary" (click)="editForm.ngSubmit.emit()">Save</button>
+  </div>
+</ng-template>
+<ng-template #detailContent let-detailModal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Detail</h4>
+    <button type="button" class="close" aria-label="Close" (click)="detailModal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <app-detail-card [Data]="detail"></app-detail-card>
+  </div>
+</ng-template>

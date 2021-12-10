@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MoviePage.Areas.Customer.Dtos;
-using MoviePage.Data;
+using MoviePage.DataAccess.Data;
 using MoviePage.Models;
 using System;
 using System.Collections.Generic;
@@ -27,8 +27,6 @@ namespace MoviePage.Controllers
         {
             var homeDto = new HomeDTO();
             homeDto.Movies = await _db.Movies.ToListAsync();
-            homeDto.Actors = await _db.Actors.ToListAsync();
-            homeDto.Directors = await _db.Directors.ToListAsync();
             return View(homeDto);
         }
         public async Task<IActionResult> MovieDetail(Guid id)
@@ -39,7 +37,7 @@ namespace MoviePage.Controllers
                 .Include(inc => inc.Tags)
                 .Include(inc => inc.Genres)
                 .AsNoTracking().FirstOrDefaultAsync();
-            return View();
+            return View(movie);
         }
 
         public IActionResult Privacy()

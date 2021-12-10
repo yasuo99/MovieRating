@@ -1,0 +1,77 @@
+<!--Header template-->
+<ng-container *ngTemplateOutlet="headerTemplate"></ng-container>
+<ng-container *ngIf="!headerTemplate" [ngTemplateOutlet]="defaultHeaderTemplate"></ng-container>
+
+<div layout="row" layout-align="start center" class="pad-left-sm pad-right-sm">
+    <span *ngIf="!searchBox.isVisible">
+        <span *ngIf="(!selectedRows.length) || !selectable" class="font-weight-bold">
+            Overview
+        </span>
+        <span *ngIf="selectedRows.length" class="font-italic">
+            {{selectedRows.length}} item(s) selected
+        </span>
+    </span>
+    <div *ngIf="searchBox.isVisible" class="d-flex justify-content-end">
+        <div class="input-group">
+            <input type="text" class="form-control rounded">
+            <div class="input-group-append">
+                <button (click)="test()" class="btn btn-primary"><i class="fas fa-search"></i></button>
+            </div>
+        </div>
+
+    </div>
+</div>
+<hr>
+<ng-template tdLoading [tdLoadingUntil]="!loading">
+    <div class="pad text-center">loading content...</div>
+</ng-template>
+<div class="table-responsive" [style.minHeight.px]="minHeight">
+    <table class="table table-stripped">
+        <thead table-header 
+        [columns]="columns" 
+        [sortAble]="true" 
+        [sortBy]="sortBy" 
+        [sortOrder]="sortOrder" 
+        [selectedRowsCount]="selectedRows.length"
+        [dataRowsCount]="data.length"
+        (sortChangeEvent)="sort($event)"
+        (checkAllEvent)="checkAll($event)"></thead>
+        <tbody>
+            <!-- <tr *ngFor="let row of data">
+                <td class="table-column" *ngFor="let col of columns">
+                    <div *ngIf="col != 'cover' else elseBlock">
+                        {{row[col]}}
+                    </div>
+                    <ng-template #elseBlock><img class="w-25" src={{row[col]}} /></ng-template>
+                </td>
+                <td class="table-column">
+                    <button class="btn btn-success mr-1">Edit <i
+                            class="fas fa-edit"></i></button>
+                    <button (click)="openDetailModal(row)" class="btn btn-info mr-1">Detail <i
+                            class="fas fa-info"></i></button>
+                    <button (click)="openDeleteModal(row)" class="btn btn-danger">Delete <i
+                            class="fas fa-trash"></i></button>
+                </td>
+            </tr> -->
+            <tr *ngFor="let row of data">
+                <td>
+                    <mat-checkbox [checked]="checkRowSelected(row)" (change)="check(row)"></mat-checkbox>
+                </td>
+                <td *ngFor="let col of columns">
+                    {{row[col.name]}}
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <app-pagination (onPageChange)="onPageChange($event)" [pagination]="pagination"></app-pagination>
+</div>
+
+<ng-template #defaultHeaderTemplate>
+    <div class="d-flex justify-content-between mb-2">
+        <h3 class="text-info">Management item</h3>
+        <div>
+            <a [routerLink]="['create']" type="button" class="btn btn-primary">Create <i class="fa fa-plus"
+                    aria-hidden="true"></i></a>
+        </div>
+    </div>
+</ng-template>

@@ -1,1 +1,91 @@
-﻿
+﻿@model List<Genres>
+<br />
+<div class="container-fluid">
+    <h2 class="text-info">Genre management</h2>
+    <div class="border p-2">
+        <h5 class="text-primary"></h5>
+        <div class="d-flex justify-content-between">
+            <div>
+                <button class="btn btn-primary rounded-pill">Add new <i class="fa fa-plus"></i></button>
+            </div>
+            <div>
+                <form method="post">
+                    <div class="form-inline">
+                        <input type="text" name="name" value="" class="form-control" />
+                        <button class="btn btn-info rounded"><i class="fa fa-search"></i></button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br />
+        <div class="table-responsive">
+            <table id="dataTable" class="table table-striped">
+                <thead class="table-secondary">
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.FirstOrDefault().GenresName)</td>
+                        <td>@Html.DisplayNameFor(model => model.FirstOrDefault().CreatedAt)</td>
+                        <td>@Html.DisplayNameFor(model => model.FirstOrDefault().CreatedBy)</td>
+                        <td style="width: 200px"></td>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script>
+        function reloadData() {
+            $.ajax({
+                url: "https://localhost:44379/api/genreapi",
+                method: "GET",
+                dataType: "Json",
+                success: (data) => {
+                    $("#tableBody").empty();
+                    for (var i = 0; i < data.length; i++) {
+                        $("#tableBody").append("<tr>"
+                            + "<td> " + data[i].genresName + " </td>"
+                            + "<td> " + data[i].createdAt + " </td>"
+                            + "<td> " + data[i].createdBy + " </td>"
+                            + "<td>"
+                            + "<a class='btn btn-primary mr-2'>Edit</a>"
+                            + "<button class='btn btn-danger deleteBtn' data-id='" + data[i].id + "'>Delete</button>"
+                            + "</td > "
+                            + "</tr > ")
+                    }
+                    $("#dataTable").DataTable();
+                    $(".deleteBtn").on("click", function (e) { console.log(e); DeleteModal(e.target.dataset.id) })
+                }
+            })
+        }
+        function DeleteModal(id) {
+            console.log(id)
+            swal({
+                title: "Are you sure?",
+                text: "Once deleted, you will not be able to recover",
+                buttons: true,
+                icon: "warning",
+                dangerMode: true
+            }).then((accept) => {
+                if (accept) {
+                    
+                    $.ajax({
+                        url: "https://localhost:44379/api/genreapi/" + id,
+                        method: "Delete",
+                        success: () => {
+                            reloadData();
+                            toastr.success("Deleted")
+                        }
+                    })
+                }
+            });
+        }
+        $(document).ready(() => {
+
+            reloadData();
+            
+        })
+
+    </script>
+}

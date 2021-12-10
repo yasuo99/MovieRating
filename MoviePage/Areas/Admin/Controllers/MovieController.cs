@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using MoviePage.Data;
+using MoviePage.DataAccess.Data;
 using MoviePage.Models;
 using System;
 using System.Collections.Generic;

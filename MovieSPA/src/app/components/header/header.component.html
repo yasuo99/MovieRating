@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 font-weight-bold">
+  <!-- Container wrapper -->
+  <div class="container p-0">
+      <!-- Toggle button -->
+      <a class="navbar-brand btn btn-warning rounded p-2 logo-text text-dark font-weight-bold" [routerLink]="['/']"><strong>MiDB</strong></a>
+      <button class="navbar-toggler nav-btn" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
+        aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Collapsible wrapper -->
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Navbar brand -->
+          <a class="btn btn-dark mr-3 rounded p-2 nav-btn" [routerLink]="['/admin']">
+            <i class="fas fa-bars"></i> Menu
+          </a>
+          <!-- Left links -->
+          <div class="me-auto mb-2 mb-lg-0 w-75">
+              <form class="d-flex input-group w-auto w-100">
+                  <input type="search"
+                         class="form-control search-input p-2 pl-3"
+                         placeholder="Search MidB"
+                         aria-label="Search" />
+                  <!-- <button class="btn btn-outline-light"
+                          type="button"
+                          data-mdb-ripple-color="dark">
+                      <i class="fas fa-search"></i>
+                  </button> -->
+                  <div class="input-group-prepend">
+                    <button (click)="test()" class="input-group-text" id="inputGroupPrepend2"><i class="fas fa-search"></i></button>
+                  </div>
+              </form>
+          </div>
+          <div class="me-auto d-flex">
+              <div class="form-inline-group" *ngIf="!IsLoggedIn">
+                <a [routerLink]="['login']" class="btn btn-dark p-2 rounded nav-btn">Sign In</a>
+              </div>
+              <div class="btn-group align-items-center" *ngIf="IsLoggedIn">
+                <label class="text-light mr-2 mt-2">Hello {{username}}</label>
+                <button (click)="LogOut()" class="btn btn-dark p-2 rounded nav-btn">Log Out</button>
+              </div>
+          </div>
+          <!-- Left links -->
+      </div>
+      <!-- Collapsible wrapper -->
+      <!-- Right elements -->
+      <div class="d-flex align-items-center">
+          <!-- Icon -->
+         
+      </div>
+      <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>

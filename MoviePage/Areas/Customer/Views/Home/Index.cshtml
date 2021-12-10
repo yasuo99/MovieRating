@@ -4,9 +4,18 @@
 @model MoviePage.Areas.Customer.Dtos.HomeDTO
 <div class="container">
     <div class="movie-items">
-        @foreach(var movie in Model.Movies)
-            {
-
-            }
+        @foreach (var movie in Model.Movies)
+        {
+            <div class="item">
+                <div class="card" style="width: 18rem;">
+                    <img class="card-img-top" src="@movie.Cover" alt="Card image cap">
+                    <div class="card-body">
+                        <h5 class="card-title">@movie.Title</h5>
+                        <p class="card-text">Description: @movie.Description.</p>
+                        <a asp-area="Customer" asp-controller="Home" asp-action="MovieDetail" asp-route-id="@movie.Id" class="btn btn-primary">Detail</a>
+                    </div>
+                </div>
+            </div>
+        }
     </div>
 </div>

@@ -1,0 +1,20 @@
+<th>
+    <mat-checkbox [indeterminate]="selectedRowsCount !== 0 && selectedRowsCount !== dataRowsCount" 
+    [checked]="selectedRowsCount === dataRowsCount && dataRowsCount !== 0"
+    (change)="checkAll()"></mat-checkbox>
+</th>
+<th (click)="onSortChange(column.name)" *ngFor="let column of columns" [ngClass]="{'active': column.name === sortBy}">
+    {{column.label}}
+    <span *ngIf="sortAble">
+        <span *ngIf="column.name === sortBy; then sorting else unsort"></span>
+    </span>
+</th>
+
+
+<ng-template #sorting>
+    <i *ngIf=" sortOrder === 2" class="fas fa-arrow-down"></i>
+    <i *ngIf="sortOrder === 1" class="fas fa-arrow-up"></i>
+</ng-template>
+<ng-template #unsort>
+    <i class="fas fa-arrow-down"></i>
+</ng-template>

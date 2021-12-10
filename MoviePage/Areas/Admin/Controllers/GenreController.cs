@@ -6,19 +6,23 @@ using System.Threading.Tasks;
 
 namespace MoviePage.Areas.Admin.Controllers
 {
-    [ApiController]
-    [Route("api/[Controller]")]
-    public class GenreController : ControllerBase
+    [Area("Admin")]
+    public class GenreController : Controller
     {
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return Ok();
+            return View();
         }
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> Create()
         {
-            return Ok();
+            return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> Edit()
+        {
+            return View();
         }
     }
 }

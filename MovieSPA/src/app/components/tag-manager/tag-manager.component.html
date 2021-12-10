@@ -1,0 +1,65 @@
+<div class="container-fluid">
+    <data-table 
+    [columns]="tableColumns"
+    [headerTemplate]="template"
+    [data]="testData">
+  </data-table>
+</div>
+<ng-template #createContent let-createModal class="bg-secondary">
+    <div class="modal-header">
+      <h4 class="modal-title">Movie create</h4>
+      <button class="close" aria-labelledby="Close" (click)="createModal.close()" type="button">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body bg-secondary">
+      <form class="example-form" [formGroup]="createForm" (ngSubmit)="submitCreate(createModal)" #create="ngForm">
+  
+        <mat-form-field class="example-full-width form-group" appearance="fill">
+          <mat-label>Tag name</mat-label>
+          <input autocomplete="off" type="text" matInput formControlName="tagName"
+            placeholder="Ex. Hot">
+          <mat-error *ngIf="createForm.get('tagName')?.errors?.minlength">
+            Please enter a valid tag name
+          </mat-error>
+          <mat-error *ngIf="createForm.get('tagName')?.errors?.required">
+            Tag name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <div class="d-flex">
+          <button class="btn btn-warning rounded-0 form-control" type="button"
+            (click)="createModal.close()">Close</button>
+          <button class="btn btn-primary rounded-0 form-control" type="submit">Save</button>
+        </div>
+      </form>
+    </div>
+  
+  </ng-template>
+  
+  <ng-template #editContent let-editModal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Profile update</h4>
+      <button type="button" class="close" aria-label="Close" (click)="editModal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <form #editForm="ngForm">
+        <div class="form-group">
+          edit values here;
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline-secondary" (click)="editModal.close()">Close</button>
+      <button type="button" class="btn btn-outline-primary" (click)="editForm.ngSubmit.emit()">Save</button>
+    </div>
+  </ng-template>
+
+  <ng-template #template>
+    <div class="d-flex justify-content-between mb-2">
+      <h3 class="text-info">Quản lý tag</h3>
+      <a [routerLink]="'create'" class="btn btn-primary rounded">Thêm tag</a>
+    </div>
+  </ng-template>
+  

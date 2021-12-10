@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MoviePage.Data;
+using MoviePage.DataAccess.Data;
 using MoviePage.Models;
 using System;
 using System.Collections.Generic;
